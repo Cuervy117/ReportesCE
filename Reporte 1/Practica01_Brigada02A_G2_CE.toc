@@ -1,0 +1,22 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
+\contentsline {section}{\numberline {2}Objetivos}{3}{section.2}%
+\contentsline {section}{\numberline {3}Marco teórico}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Definiciones y parámetros de circuitos}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Elementos pasivos}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Sistemas de primer orden RC y RL}{4}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Análisis en régimen permanente senoidal}{4}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Desarrollo}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Circuito RC}{5}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Parte experimental}{5}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Parte teórica}{6}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Análisis senoidal permanente (Excitación senoidal)}{7}{subsubsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.2}Circuito RL}{10}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Parte experimental}{10}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Parte teórica}{11}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Análisis senoidal permanente (Excitación senoidal)}{12}{subsubsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.3}Análisis de respuesta transitoria y permanente (Excitación en DC)}{16}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Circuito RC}{16}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Circuito RL}{17}{subsubsection.4.3.2}%
+\contentsline {section}{\numberline {5}Conclusiones}{19}{section.5}%
+\contentsline {section}{\numberline {6}Bibliografía}{19}{section.6}%
