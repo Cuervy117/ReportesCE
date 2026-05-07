@@ -1,0 +1,108 @@
+\section{Desarrollo}
+\subsection{Teorema de Sustitución}
+Para este ejercicio se utilizó el siguiente circuito:
+\begin{center}
+	\begin{circuitikz}[scale=0.8] % Ajusta la escala si el circuito es muy grande
+		% Definimos nodos clave (coordenadas) para guiar el dibujo
+		\coordinate (A) at (0,4);
+		\coordinate[label=above:a] (B) at (4,4);
+		\coordinate (C) at (8,4);
+		\coordinate (D) at (0,0);
+		\coordinate[label=below:b] (E) at (4,0);
+		\coordinate (F) at (8,0);
+		
+		% --- DIBUJO DEL CIRCUITO ---
+		\draw (A) to[battery1, l=$E_1$] (D);
+		
+		\draw (A) to[R, l=$R_1$] (B);
+
+		\draw (B) to[R, l=$R_4$] (C);
+		
+		\draw (C) to[R, l=$R_5$] (8,2) to[R, l=$R_6$] (F);
+		
+		\draw (B) to[R, l=$R_2$] (4,2) to[R, l=$R_3$] (E);
+		
+		\draw (D) -- (F);
+	\end{circuitikz}
+\end{center}
+Con los valores de los componentes definidos para la experimentación:
+\begin{equation*}
+	\begin{matrix}
+		R_1 = 3.3 \text{ k}\Omega & R_2 = 1 \text{ k}\Omega & R_3 = 1 \text{ k}\Omega \\
+		R_4 = 330 \Omega & R_5 = 330 \Omega   & R_6 = 330\Omega \\
+		E_1 = 9 \text{ V}
+	\end{matrix}
+\end{equation*}
+Para la validación del teorema, se seleccionó la rama conformada por el arreglo en serie de $R_2$ y $R_3$. De acuerdo con la teoría, si la red eléctrica tiene una solución única, dicha rama puede sustituirse por una fuente ideal sin afectar las variables del resto del circuito.
+
+\subsubsection{Parte experimental}
+
+\begin{enumerate}
+	\item Se armó el circuito original y se midieron con el multímetro digital el voltaje ($\hat{v}$) en la rama de carga (nodos 'a' a 'b').
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{assets/img/Tsustitucion_parte1.jpeg}
+		\caption{Montaje experimental del circuito de 6 resistencias para el Teorema de Sustitución.}
+		\label{fig:sustitucion_p1}
+	\end{figure}
+	\item Se procedió a retirar las resistencias $R_2$ y $R_3$, sustituyéndolas por una fuente de voltaje ajustada exactamente al valor $\hat{v}$ medido previamente.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{assets/img/Tsustitucion_parte2.jpeg}
+		\caption{Sustitución de la rama por una fuente de poder equivalente.}
+		\label{fig:sustitucion_p2}
+	\end{figure}
+	\item Se midieron las tensiones en las resistencias restantes ($R_1$ a $R_6$) para constatar que los valores permanecieran inalterados respecto a la red original.
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.8 \linewidth]{assets/img/Tsustitucion_medicion1.jpeg}
+			\label{fig:sustitucion_m1}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.8\linewidth]{assets/img/Tsustitucion_medicion2.jpeg}
+			\label{fig:sustitucion_m2}
+		\end{subfigure}			
+		\caption{Mediciones sobre el circuito.}
+	\end{figure}
+\end{enumerate}
+
+\begin{table}[H]
+	\centering
+	\caption{Resultados experimentales: Teorema de Sustitución.}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		\textbf{Configuración} & \textbf{$V_{E1}$ [V]} & \textbf{$V_{R1}$ [V]} & \textbf{$V_{ab}$ [V]} & \textbf{$V_{R4}$ [V]} & \textbf{$V_{R5}$ [V]} & \textbf{$V_{R6}$ [V]} \\ \hline
+		Red Original & 9.05 & 7.53 & 1.52 & 0.51 & 0.51 & 0.51 \\ \hline
+		Red Modificada & 9.05 & 7.53 & 1.52 & 0.51 & 0.51 & 0.51 \\ \hline
+	\end{tabular}
+\end{table}
+
+Como se observa en los datos experimentales, al sustituir la rama $ab$ por una fuente de voltaje de valor idéntico a la caída de potencial original, los voltajes en las ramas adyacentes ($R_1, R_4, R_5, R_6$) no sufrieron variación alguna. Esto confirma la validez del teorema, el cual establece que la red modificada es más sencilla de analizar sin afectar las condiciones iniciales del resto de la red. 
+
+
+\subsubsection{Parte teórica}
+
+Para validar la precisión del modelo experimental, es imperativo contrastar los resultados con una referencia teórica o simulada. Esto permite establecer un margen de error y asegurar que las variaciones observadas se encuentren dentro de los límites de tolerancia de los componentes y equipos de medición. La simulación actúa como una representación ideal que fundamenta la unicidad de la solución de la red[cite: 680]. El proceso de validación siguió la siguiente metodología:
+
+\begin{enumerate}
+	\item Implementación del esquema circuital original en el entorno de simulación para obtener los parámetros de referencia.
+	\item Aplicación del teorema de sustitución mediante el reemplazo de la rama $ab$ por una fuente de voltaje ideal de valor equivalente a la caída de potencial obtenida[cite: 686].
+	\item Verificación de la invariancia de los valores de tensión y corriente en el resto de la red tras la modificación[cite: 686].
+\end{enumerate}
+
+Se cumple además la Ley de Voltajes de Kirchhoff en ambos lazos:
+\begin{itemize}
+	\item Lazo 1: $V_{E1} = V_{R1} + V_{ab} \implies 9.05 \text{ V} = 7.53 \text{ V} + 1.52 \text{ V}$.
+	\item Lazo 2: $V_{ab} = V_{R4} + V_{R5} + V_{R6} \implies 1.52 \text{ V} \approx 0.51 \text{ V} + 0.51 \text{ V} + 0.51 \text{ V} = 1.53 \text{ V}$.
+\end{itemize}
+La ligera discrepancia en el segundo lazo ($0.01 \text{ V}$) se atribuye a la tolerancia de los instrumentos de medición y a la resistencia de contacto en la tablilla de conexiones.
+
+\subsection{Teorema de Tellegen}
+\subsubsection{Parte experimental}
+\subsubsection{Parte teórica}
+\subsection{Teorema de Thevenin}
+\subsubsection{Parte experimental}
+\subsubsection{Parte teórica}
