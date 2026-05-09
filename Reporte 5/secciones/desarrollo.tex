@@ -218,6 +218,264 @@ Al comparar este resultado con la potencia suministrada por la fuente ($P_{sum} 
 
 Esta discrepancia de aproximadamente $0.3 \text{ mW}$ es consistente con los cálculos manuales y se atribuye a los errores de redondeo en las mediciones de voltaje y a la tolerancia de los instrumentos de laboratorio. El resultado confirma experimentalmente la validez del teorema y la conservación de la energía en el sistema bajo estudio.
 
-\subsection{Teorema de Thevenin}
+\subsection{Teorema de Thévenin}
+
+El objetivo de esta fase es modelar una red lineal activa mediante un circuito equivalente simplificado (fuente de tensión en serie con una resistencia). El circuito bajo estudio presenta múltiples fuentes y una red resistiva compleja, cuya configuración se detalla a continuación:
+
+\begin{center}
+	\begin{circuitikz}[scale=0.8]
+		\draw (0,4) to[battery1, l=$E_1$] (0,0);
+		\draw (0,4) to[R, l=$R_1$] (3,4) to[short, -*] (9,4) node[above] {a};
+		\draw (3,4) to[R, l=$R_2$] (3,0);
+		\draw (5,4) to[battery1, l=$E_2$] (5,0); 
+		\draw (8,4) to[R, l=$R_3$] (8,2) to[R, l=$R_4$] (8,0);
+		\draw (8,2) to[short, -*] (9,2) node[below] {b};
+		\draw (0,0) -- (8,0);
+	\end{circuitikz}
+\end{center}
+
+	\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=0.8 \linewidth]{assets/img/Tthevenin_circuito1.jpeg}
+		\label{fig:thevenin_s1}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=0.8
+		\linewidth]{assets/img/Tthevenin_circuito1_2.jpeg}
+		\label{fig:thevenin_s2}
+	\end{subfigure}			
+	\caption{Circuito armado en laboratorio.}
+\end{figure}
+
+Los parámetros de los componentes para esta red activa son:
+\begin{equation*}
+	\begin{matrix}
+		E_1 = 12.05 \text{ V} & E_2 = 6.014 \text{ V} & R_1 = 999 \text{ }\Omega \\
+		R_2 = 97.2 \text{ }\Omega & R_3 = 9.62 \text{ k}\Omega & R_4 = 3.214 \text{ k}\Omega
+	\end{matrix}
+\end{equation*}
+
 \subsubsection{Parte experimental}
+
+La metodología para la validación del teorema consistió en tres etapas: la caracterización de la red, la prueba bajo carga y la validación del modelo equivalente.
+
+\begin{enumerate}
+	\item \textbf{Obtención de parámetros de Thévenin:} Se midió el voltaje de circuito abierto ($V_{th}$) entre las terminales $a$ y $b$, y posteriormente se determinó la resistencia equivalente ($R_{th}$) mediante la anulación de las fuentes independientes.
+	
+		\begin{figure}[H]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.8 \linewidth]{assets/img/Tthevenin_medicion1.png}
+			\label{fig:thevenin_s3}
+			\caption{Valor de la caída de voltaje en $ab$.}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.8
+			\linewidth]{assets/img/Tthevenin_medicion2.jpeg}
+			\label{fig:thevenin_s4}
+			\caption{Fuentes puenteadas para la medición de $R'$.}
+		\end{subfigure}			
+	\end{figure}
+	
+	\begin{itemize}
+		\item Voltaje de Thévenin ($V_{th}$) = $-4.26 \text{ V}$
+		\item Resistencia de Thévenin ($R_{th}$) = $2.424 \text{ k}\Omega$
+	\end{itemize}
+	
+	\item \textbf{Prueba de la red activa bajo carga:} Se conectaron tres resistencias de carga ($R_L$) distintas en las terminales $a$ y $b$ de la red original, midiendo la tensión de salida para cada caso.
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{0.3\textwidth}
+			\centering
+			\includegraphics[width=0.8 \linewidth]{assets/img/Tthevenin_medicion3_1.jpeg}
+			\label{fig:thevenin_s5}
+			\caption{Valor de la caída de voltaje para $R_{ab}=9.88 \text{k}\Omega$.}
+		\end{subfigure}
+		\begin{subfigure}{0.3\textwidth}
+			\centering
+			\includegraphics[width=0.8
+			\linewidth]{assets/img/Tthevenin_medicion3_3.jpeg}
+			\label{fig:thevenin_s6}
+			\caption{Valor de la caída de voltaje para $R_{ab}=978 \Omega$..}
+		\end{subfigure}
+		\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=0.8
+		\linewidth]{assets/img/Tthevenin_medicion3_2.jpeg}
+		\label{fig:thevenin_s7}
+		\caption{Valor de la caída de voltaje para $R_{ab}=214 \Omega$.}
+		\end{subfigure}			
+	\end{figure}
+	
+	\begin{table}[H]
+		\centering
+		\caption{Comportamiento de la Red Original ante variaciones de carga.}
+		\begin{tabular}{|l|c|c|c|}
+			\hline
+			\textbf{Parámetro} & \textbf{$R_{L1}$ ($9.88\text{ k}\Omega$)} & \textbf{$R_{L2}$ ($0.978\text{ k}\Omega$)} & \textbf{$R_{L3}$ ($214\text{ }\Omega$)} \\ \hline
+			$V_{ab}$ [V] & -3.427 & -1.227 & -0.347 \\ \hline
+			Potencia [mW] & 1.189 & 1.539 & 0.563 \\ \hline
+		\end{tabular}
+	\end{table}
+	
+	\item \textbf{Implementación del circuito equivalente:} Se armó un circuito compuesto por una fuente de voltaje y una resistencia en serie, calibradas lo más cerca posible a los valores de Thévenin obtenidos ($V' = -4.243 \text{ V}$ y $R' = 2.421 \text{ k}\Omega$). Se repitieron las mediciones con las mismas cargas para contrastar el comportamiento.
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{0.3\textwidth}
+			\centering
+			\includegraphics[width=0.8 \linewidth]{assets/img/Tthevenin_medicion4_1.jpeg}
+			\label{fig:thevenin_s8}
+			\caption{Valor de la caída de voltaje para $R_{ab}=9.88 \text{k}\Omega$.}
+		\end{subfigure}
+		\begin{subfigure}{0.3\textwidth}
+			\centering
+			\includegraphics[width=0.8
+			\linewidth]{assets/img/Tthevenin_medicion4_2.jpeg}
+			\label{fig:thevenin_s9}
+			\caption{Valor de la caída de voltaje para $R_{ab}=978 \Omega$..}
+		\end{subfigure}
+		\begin{subfigure}{0.3\textwidth}
+			\centering
+			\includegraphics[width=0.8
+			\linewidth]{assets/img/Tthevenin_medicion4_3.jpeg}
+			\label{fig:thevenin_s10}
+			\caption{Valor de la caída de voltaje para $R_{ab}=214 \Omega$.}
+		\end{subfigure}			
+	\end{figure}
+	
+\begin{table}[H]
+	\centering
+	\caption{Comportamiento del Circuito Equivalente ante variaciones de carga.}
+	\begin{tabular}{|l|c|c|c|}
+		\hline
+		\textbf{Parámetro} & \textbf{$R_{L1}$ ($9.88\text{ k}\Omega$)} & \textbf{$R_{L2}$ ($0.978\text{ k}\Omega$)} & \textbf{$R_{L3}$ ($214\text{ }\Omega$)} \\ \hline
+		$V_{ab}$ [V] & -3.281 & -1.081 & -0.297 \\ \hline
+		Potencia [mW] & 1.089 & 1.195 & 0.412 \\ \hline
+	\end{tabular}
+\end{table}
+	
+\end{enumerate}
+
+
+\textbf{Análisis de resultados}
+
+Los datos obtenidos en las tablas comparativas demuestran la validez del Teorema de Thévenin, ya que el circuito equivalente replica con fidelidad la tendencia de respuesta de la red original ante variaciones de carga. En ambos sistemas, se observa que la tensión de salida $V_{ab}$ disminuye conforme la resistencia de carga $R_L$ se reduce, comportándose como un divisor de tensión dependiente de la impedancia de la red.
+
+No obstante, se registra una discrepancia sistemática en los valores de tensión. Esta diferencia se atribuye primordialmente a las limitaciones técnicas en la calibración de las fuentes de laboratorio. El modelo equivalente se implementó con una tensión de $-4.243 \text{ V}$, valor ligeramente inferior a los $-4.26 \text{ V}$ de la red activa original. Asimismo, la resistencia de Thévenin empleada ($2.421 \text{ k}\Omega$) presentó una desviación respecto al valor experimental nominal ($2.424 \text{ k}\Omega$). Estas variaciones en los parámetros iniciales del equivalente explican por qué el error relativo se acentúa en la carga de $214 \text{ }\Omega$, donde la red es más sensible a las caídas de tensión internas.
+
+Un hallazgo fundamental en este análisis es el comportamiento de la potencia disipada por la carga. De acuerdo con los datos experimentales, la potencia no sigue una relación lineal con la resistencia, sino que presenta un punto máximo. Se observa que la carga $R_{L2}$ ($0.978 \text{ k}\Omega$) registra la mayor transferencia de energía ($1.539 \text{ mW}$ en la red original), superando tanto a la carga de mayor valor como a la de menor valor. 
+
+Este fenómeno valida de forma práctica el \textbf{Teorema de Máxima Transferencia de Potencia}, el cual dicta que la entrega de energía es óptima cuando $R_L$ se aproxima al valor de la resistencia de Thévenin ($R_{th} = 2.424 \text{ k}\Omega$). Dado que $R_{L2}$ es el valor más cercano al punto de acoplamiento de impedancias en comparación con los extremos de $9.88 \text{ k}\Omega$ y $214 \text{ }\Omega$, los resultados confirman que el circuito equivalente no solo modela correctamente las tensiones de la red, sino también su capacidad de suministro energético.
+
+A pesar de las tolerancias de los componentes y las dificultades de calibración, se concluye que una red lineal activa compleja puede simplificarse a una sola rama equivalente. Esta representación permite predecir con precisión el comportamiento de una carga arbitraria y optimizar el rendimiento del sistema, simplificando significativamente el proceso de análisis y diseño en ingeniería.
 \subsubsection{Parte teórica}
+
+Para validar la precisión del modelo experimental y fundamentar la unicidad de la solución, se realizó una réplica del experimento en un entorno de simulación ideal. Este proceso permite contrastar los valores reales con una referencia teórica libre de las tolerancias físicas de los componentes.
+
+\begin{enumerate}
+	\item \textbf{Obtención de parámetros de Thévenin ideales:} Se simuló la red lineal activa original. Se midió la tensión de circuito abierto ($V_{th}$) y se determinó la resistencia equivalente ($R_{th}$) cortocircuitando las fuentes de alimentación ($E_1$ y $E_2$).
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.8 \linewidth]{assets/img/Tthevenin_simulacionV.png}
+			\label{fig:thevenin_s11}
+			\caption{Obtención de $V'$.}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.8
+			\linewidth]{assets/img/Tthevenin_simulacionR.png}
+			\label{fig:thevenin_12}
+			\caption{Obtención de $R'$.}
+		\end{subfigure}			
+	\end{figure}
+	
+	\begin{itemize}
+		\item Voltaje de Thévenin ideal ($V_{th}$) = $-4.507 \text{ V}$
+		\item Resistencia de Thévenin ideal ($R_{th}$) = $2.409 \text{ k}\Omega$
+	\end{itemize}
+	
+	\item \textbf{Prueba de la red activa original (Simulación):} Se conectaron las tres resistencias de carga ($R_L$) en la red compleja para obtener los valores de referencia de voltaje y potencia.
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{0.3\textwidth}
+			\centering
+			\includegraphics[width=0.8 \linewidth]{assets/img/Tthevenin_medicionS1.png}
+			\label{fig:thevenin_s12}
+		\end{subfigure}
+		\begin{subfigure}{0.3\textwidth}
+			\centering
+			\includegraphics[width=0.8
+			\linewidth]{assets/img/Tthevenin_medicionS2.png}
+			\label{fig:thevenin_s13}
+		\end{subfigure}
+		\begin{subfigure}{0.3\textwidth}
+			\centering
+			\includegraphics[width=0.8
+			\linewidth]{assets/img/Tthevenin_medicionS3.png}
+			\label{fig:thevenin_s14}
+		\end{subfigure}			
+	\end{figure}
+	
+	\begin{table}[H]
+		\centering
+		\caption{Simulación: Comportamiento de la Red Original ante variaciones de carga.}
+		\begin{tabular}{|l|c|c|c|}
+			\hline
+			\textbf{Parámetro} & \textbf{$R_{L1}$ ($9.88\text{ k}\Omega$)} & \textbf{$R_{L2}$ ($0.978\text{ k}\Omega$)} & \textbf{$R_{L3}$ ($214\text{ }\Omega$)} \\ \hline
+			$V_{ab}$ [V] & -3.624 & -1.302 & -0.368 \\ \hline
+			Potencia [mW] & 1.329 & 1.733 & 0.632 \\ \hline
+		\end{tabular}
+	\end{table}
+	
+
+	\item \textbf{Implementación del circuito equivalente (Simulación):} Se construyó el modelo simplificado utilizando una fuente ideal de $-4.507 \text{ V}$ y una resistencia de $2.409 \text{ k}\Omega$.
+	
+	
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{0.3\textwidth}
+			\centering
+			\includegraphics[width=0.8 \linewidth]{assets/img/Tthevenin_medicionS4.png}
+			\label{fig:thevenin_s15}
+		\end{subfigure}
+		\begin{subfigure}{0.3\textwidth}
+			\centering
+			\includegraphics[width=0.8
+			\linewidth]{assets/img/Tthevenin_medicionS5.png}
+			\label{fig:thevenin_s16}
+		\end{subfigure}
+		\begin{subfigure}{0.3\textwidth}
+			\centering
+			\includegraphics[width=0.8
+			\linewidth]{assets/img/Tthevenin_medicionS6.png}
+			\label{fig:thevenin_s17}
+		\end{subfigure}			
+	\end{figure}
+	
+	\begin{table}[H]
+		\centering
+		\caption{Simulación: Comportamiento del Circuito Equivalente ante variaciones de carga.}
+		\begin{tabular}{|l|c|c|c|}
+			\hline
+			\textbf{Parámetro} & \textbf{$R_{L1}$ ($9.88\text{ k}\Omega$)} & \textbf{$R_{L2}$ ($0.978\text{ k}\Omega$)} & \textbf{$R_{L3}$ ($214\text{ }\Omega$)} \\ \hline
+			$V_{ab}$ [V] & -3.623 & -1.301 & -0.368 \\ \hline
+			Potencia [mW] & 1.328 & 1.731 & 0.632 \\ \hline
+		\end{tabular}
+	\end{table}
+	
+\end{enumerate}
+
+\textbf{Análisis de resultados (Simulación vs Experimental)}
+
+Al contrastar los datos teóricos con los experimentales, se observa que la simulación arroja una equivalencia casi absoluta (error < 0.1\%) entre la red original y su equivalente de Thévenin. Esto confirma que el modelo de dos terminales es una representación matemática exacta de la red activa.La diferencia de aproximadamente $0.24 \text{ V}$ entre la tensión de Thévenin ideal ($-4.507 \text{ V}$) y la experimental ($-4.26 \text{ V}$) se explica por la resistencia interna de las fuentes de laboratorio y la impedancia de los cables, factores que no se consideran en el entorno de simulación. No obstante, en ambos casos se verifica que la carga de $978 \text{ }\Omega$ es la que disipa la mayor cantidad de potencia al ser el valor más próximo a la resistencia de Thévenin ($2.4 \text{ k}\Omega$), validando nuevamente el teorema de máxima transferencia de potencia de forma universal.

@@ -98,3 +98,19 @@ El modelo equivalente se compone de una red eléctrica simplificada de dos termi
 		[dashed] (-1,-0.5) rectangle (3.5,3.5);
 	\end{circuitikz}
 \end{center}
+	
+\subsection{Teorema de Máxima Transferencia de Potencia}
+
+Una aplicación fundamental del equivalente de Thévenin es la determinación de la condición óptima para la transferencia de energía. El teorema establece que una red lineal activa suministrará la máxima potencia promedio a una carga externa $R_L$ cuando el valor de dicha resistencia sea exactamente igual a la resistencia equivalente de Thévenin de la red vista desde las terminales de salida:
+
+\begin{equation}
+	R_L = R_{th}
+\end{equation}
+
+Bajo esta condición de "apareamiento" de impedancias, la potencia máxima disipada por la carga se calcula como:
+
+\begin{equation}
+	P_{max} = \frac{V_{th}^2}{4R_{th}}
+\end{equation}
+
+El estudio de este fenómeno es crucial en ingeniería para optimizar el rendimiento de sistemas de comunicación y distribución de energía, donde se busca que la red eléctrica modificada entregue la mayor cantidad de energía posible a la etapa de salida.
