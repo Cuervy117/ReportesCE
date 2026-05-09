@@ -1,0 +1,223 @@
+\section{Desarrollo}
+\subsection{Teorema de Sustitución}
+Para este ejercicio se utilizó el siguiente circuito:
+\begin{center}
+	\begin{circuitikz}[scale=0.8] % Ajusta la escala si el circuito es muy grande
+		% Definimos nodos clave (coordenadas) para guiar el dibujo
+		\coordinate (A) at (0,4);
+		\coordinate[label=above:a] (B) at (4,4);
+		\coordinate (C) at (8,4);
+		\coordinate (D) at (0,0);
+		\coordinate[label=below:b] (E) at (4,0);
+		\coordinate (F) at (8,0);
+		
+		% --- DIBUJO DEL CIRCUITO ---
+		\draw (A) to[battery1, l=$E_1$] (D);
+		
+		\draw (A) to[R, l=$R_1$] (B);
+
+		\draw (B) to[R, l=$R_4$] (C);
+		
+		\draw (C) to[R, l=$R_5$] (8,2) to[R, l=$R_6$] (F);
+		
+		\draw (B) to[R, l=$R_2$] (4,2) to[R, l=$R_3$] (E);
+		
+		\draw (D) -- (F);
+	\end{circuitikz}
+\end{center}
+Con los valores de los componentes definidos para la experimentación:
+\begin{equation*}
+	\begin{matrix}
+		R_1 = 3.3 \text{ k}\Omega & R_2 = 1 \text{ k}\Omega & R_3 = 1 \text{ k}\Omega \\
+		R_4 = 330 \Omega & R_5 = 330 \Omega   & R_6 = 330\Omega \\
+		E_1 = 9 \text{ V}
+	\end{matrix}
+\end{equation*}
+Para la validación del teorema, se seleccionó la rama conformada por el arreglo en serie de $R_2$ y $R_3$. De acuerdo con la teoría, si la red eléctrica tiene una solución única, dicha rama puede sustituirse por una fuente ideal sin afectar las variables del resto del circuito.
+
+\subsubsection{Parte experimental}
+
+\begin{enumerate}
+	\item Se armó el circuito original y se midieron con el multímetro digital el voltaje ($\hat{v}$) en la rama de carga (nodos 'a' a 'b').
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{assets/img/Tsustitucion_parte1.jpeg}
+		\caption{Montaje experimental del circuito de 6 resistencias para el Teorema de Sustitución.}
+		\label{fig:sustitucion_p1}
+	\end{figure}
+	\item Se procedió a retirar las resistencias $R_2$ y $R_3$, sustituyéndolas por una fuente de voltaje ajustada exactamente al valor $\hat{v}$ medido previamente.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{assets/img/Tsustitucion_parte2.jpeg}
+		\caption{Sustitución de la rama por una fuente de poder equivalente.}
+		\label{fig:sustitucion_p2}
+	\end{figure}
+	\item Se midieron las tensiones en las resistencias restantes ($R_1$ a $R_6$) para constatar que los valores permanecieran inalterados respecto a la red original.
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.8 \linewidth]{assets/img/Tsustitucion_medicion1.jpeg}
+			\label{fig:sustitucion_m1}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.8\linewidth]{assets/img/Tsustitucion_medicion2.jpeg}
+			\label{fig:sustitucion_m2}
+		\end{subfigure}			
+		\caption{Mediciones sobre el circuito.}
+	\end{figure}
+\end{enumerate}
+
+\begin{table}[H]
+	\centering
+	\caption{Resultados experimentales: Teorema de Sustitución.}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		\textbf{Configuración} & \textbf{$V_{E1}$ [V]} & \textbf{$V_{R1}$ [V]} & \textbf{$V_{ab}$ [V]} & \textbf{$V_{R4}$ [V]} & \textbf{$V_{R5}$ [V]} & \textbf{$V_{R6}$ [V]} \\ \hline
+		Red Original & 9.05 & 7.53 & 1.52 & 0.51 & 0.51 & 0.51 \\ \hline
+		Red Modificada & 9.05 & 7.53 & 1.52 & 0.51 & 0.51 & 0.51 \\ \hline
+	\end{tabular}
+\end{table}
+
+Como se observa en los datos experimentales, al sustituir la rama $ab$ por una fuente de voltaje de valor idéntico a la caída de potencial original, los voltajes en las ramas adyacentes ($R_1, R_4, R_5, R_6$) no sufrieron variación alguna. Esto confirma la validez del teorema, el cual establece que la red modificada es más sencilla de analizar sin afectar las condiciones iniciales del resto de la red. 
+
+
+\subsubsection{Parte teórica}
+
+Para validar la precisión del modelo experimental, es imperativo contrastar los resultados con una referencia teórica o simulada. Esto permite establecer un margen de error y asegurar que las variaciones observadas se encuentren dentro de los límites de tolerancia de los componentes y equipos de medición. La simulación actúa como una representación ideal que fundamenta la unicidad de la solución de la red. El proceso de validación siguió la siguiente metodología:
+
+\begin{enumerate}
+	\item Implementación del esquema circuital original en el entorno de simulación para obtener los parámetros de referencia.
+	
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{assets/img/Tsustitucion_simulacion1.png}
+		\caption{.}
+		\label{fig:sustitucion_s1}
+	\end{figure}
+	
+	\item Aplicación del teorema de sustitución mediante el reemplazo de la rama $ab$ por una fuente de voltaje ideal de valor equivalente a la caída de potencial obtenida.
+
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.8 \linewidth]{assets/img/Tsustitucion_simulacion2.png}
+			\label{fig:sustitucion_s2}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.8\linewidth]{assets/img/Tsustitucion_simulacion3.png}
+			\label{fig:sustitucion_s3}
+		\end{subfigure}			
+		\caption{.}
+	\end{figure}
+	
+	\item Verificación de la invariancia de los valores de tensión y corriente en el resto de la red tras la modificación.
+
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.8 \linewidth]{assets/img/Tsustitucion_simulacion4.png}
+			\label{fig:sustitucion_s4}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=0.8
+			\linewidth]{assets/img/Tsustitucion_simulacion5.png}
+			\label{fig:sustitucion_s5}
+		\end{subfigure}			
+		\caption{.}
+	\end{figure}
+
+\end{enumerate}
+
+\begin{table}[h!]
+	\centering
+	\caption{Resultados de simulación.}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		\textbf{Configuración} & \textbf{$V_{E1}$ [V]} & \textbf{$V_{R1}$ [V]} & \textbf{$V_{ab}$ [V]} & \textbf{$V_{R4}$ [V]} & \textbf{$V_{R5}$ [V]} & \textbf{$V_{R6}$ [V]} \\ \hline
+		Red Original & 9.05 & 7.537 & 1.513 & 0.504 & 0.504 & 0.504 \\ \hline
+		Red Modificada & 9.05 & 7.538 & 1.512 & 0.504 & 0.504 & 0.504 \\ \hline
+	\end{tabular}
+\end{table}
+
+\textbf{Análisis de la Unicidad y Leyes de Kirchhoff}
+
+La validez del teorema de sustitución se fundamenta en la suposición de la unicidad de la solución de las redes eléctricas para un conjunto de entradas dado. Al emplear los valores obtenidos en la simulación, se observa que tanto en la red original como en la modificada se satisfacen con precisión las leyes de Kirchhoff, confirmando que la red eléctrica modificada es más sencilla de estudiar sin alterar el comportamiento de la red original.
+
+Para la validación matemática, se analizan los dos lazos del circuito bajo ambas configuraciones:
+
+\begin{itemize}
+	\item \textbf{Lazo de entrada (LVK 1):} En la red original, la suma de las caídas de tensión coincide exactamente con la fuente de alimentación ($7.537\text{ V} + 1.513\text{ V} = 9.050\text{ V}$). En la red modificada, al realizar la sustitución por una fuente de $1.512\text{ V}$, se observa un ajuste en la resistencia $R_1$, la cual registra $7.538\text{ V}$, manteniendo el equilibrio del lazo en $9.050\text{ V}$.
+	
+	\item \textbf{Lazo de carga (LVK 2):} En la configuración original, la tensión de la rama central es de $1.513\text{ V}$, mientras que la suma de las caídas en la rama derecha es $V_{R4} + V_{R5} + V_{R6} = 0.504\text{ V} + 0.504\text{ V} + 0.504\text{ V} = 1.512\text{ V}$. Tras la sustitución de la rama $ab$ por una fuente ideal de $1.512\text{ V}$, la igualdad se vuelve exacta: $1.512\text{ V} = 0.504\text{ V} + 0.504\text{ V} + 0.504\text{ V}$.
+\end{itemize}
+
+La mínima diferencia de $0.001\text{ V}$ detectada en el análisis de la red original se atribuye a los algoritmos de redondeo del simulador al manejar los parámetros concentrados de las resistencias de $330~\Omega$ y $1\text{ k}\Omega$. No obstante, la invarianza de los voltajes en las ramas $R_4, R_5$ y $R_6$ al pasar de una red a otra demuestra que la rama $R_2, R_3$ puede sustituirse por una fuente ideal sin que se afecten los voltajes y corrientes dentro del circuito.
+
+\subsection{Teorema de Tellegen}
+
+El teorema de Tellegen es una herramienta analítica de carácter general fundamentada exclusivamente en las leyes de Kirchhoff, lo que le permite ser independiente de la naturaleza lineal o no lineal de los componentes de la red. Este teorema establece que, para cualquier red eléctrica de parámetros concentrados y determinística, la suma algebraica de las potencias instantáneas en todas las ramas es nula:
+
+\begin{equation}
+	\sum_{k=1}^{b} v_{k} j_{k} = 0
+\end{equation}
+
+En términos físicos, representa el principio de conservación de la energía, dictando que la potencia suministrada por las fuentes activas es idéntica a la potencia total disipada por los elementos pasivos del sistema.
+
+\subsubsection{Parte experimental}
+
+Para la validación de este principio, se emplearon los valores de tensión y corriente obtenidos en la configuración original de la red. Se calculó la potencia individual de cada elemento ($P = V \cdot I$) para verificar el balance energético total.
+
+\textbf{Cálculos de Corriente por resistencia}
+A partir de los voltajes medidos y los valores de resistencia, se determinaron las intensidades de corriente mediante la Ley de Ohm:
+
+\begin{itemize}
+	\item $I_{R1} = \frac{7.62 \text{ V}}{3300 \text{ } \Omega} = 2.310 \text{ mA}$
+	\item $I_{R2} = \frac{0.76 \text{ V}}{1000 \text{ } \Omega} = 0.760 \text{ mA}$
+	\item $I_{R3} = \frac{0.78 \text{ V}}{1000 \text{ } \Omega} = 0.780 \text{ mA}$
+	\item $I_{R4} = \frac{0.52 \text{ V}}{330 \text{ } \Omega} = 1.576 \text{ mA}$
+	\item $I_{R5} = \frac{0.52 \text{ V}}{330 \text{ } \Omega} = 1.576 \text{ mA}$
+	\item $I_{R6} = \frac{0.52 \text{ V}}{330 \text{ } \Omega} = 1.576 \text{ mA}$
+\end{itemize}
+
+\textbf{Balance de Potencias}
+En la Tabla \ref{tab:tellegen_mw} se desglosan los voltajes y las potencias calculadas para cada componente del circuito.
+
+\begin{table}[h!]
+	\centering
+	\caption{Balance de Potencias Experimentales (mW).}
+	\label{tab:tellegen_mw}
+	\begin{tabular}{|l|c|c|}
+		\hline
+		\textbf{Elemento} & \textbf{Voltaje [V]} & \textbf{Potencia [mW]} \\ \hline
+		Fuente $E_1$ & 9.08 & 20.8 \\ \hline
+		Resistencia $R_1$ & 7.62 & 17.5 \\ \hline
+		Resistencia $R_2$ & 0.76 & 0.578 \\ \hline
+		Resistencia $R_3$ & 0.78 & 0.592 \\ \hline
+		Resistencia $R_4$ & 0.52 & 0.822 \\ \hline
+		Resistencia $R_5$ & 0.52 & 0.822 \\ \hline
+		Resistencia $R_6$ & 0.52 & 0.822 \\ \hline
+	\end{tabular}
+\end{table}
+
+\textbf{Análisis de Resultados}
+La suma de las potencias absorbidas por las resistencias en la red es:
+\begin{equation}
+	P_{abs} = 17.5 + 0.578 + 0.592 + 0.822 + 0.822 + 0.822 = 21.136 \text{ mW}
+\end{equation}
+
+Al comparar este resultado con la potencia suministrada por la fuente ($P_{sum} = 20.8 \text{ mW}$), se observa una diferencia residual de:
+\begin{equation}
+	\Delta P = |21.136 - 20.800| = 0.336 \text{ mW}
+\end{equation}
+
+Esta discrepancia de aproximadamente $0.3 \text{ mW}$ es consistente con los cálculos manuales y se atribuye a los errores de redondeo en las mediciones de voltaje y a la tolerancia de los instrumentos de laboratorio. El resultado confirma experimentalmente la validez del teorema y la conservación de la energía en el sistema bajo estudio.
+
+\subsection{Teorema de Thevenin}
+\subsubsection{Parte experimental}
+\subsubsection{Parte teórica}

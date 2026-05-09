@@ -1,0 +1,100 @@
+\section{Marco teórico}
+
+\subsection{Teorema de sustitución}
+El teorema de sustitución es de carácter sumamente general, ya que puede aplicarse a redes eléctricas lineales o no lineales, así como a sistemas variantes o invariantes en el tiempo. Su aplicación requiere que la red eléctrica sea de parámetros concentrados (es decir, que satisfaga estrictamente las leyes de Kirchhoff) y que sea determinista, garantizando que no exista incertidumbre respecto a los voltajes y corrientes de rama.
+
+Este teorema establece que, si una red eléctrica tiene una solución única, una sección o rama de esta puede ser reemplazada sin afectar los voltajes y corrientes del resto del circuito original. En términos prácticos, la rama analizada puede ser sustituida por:
+\begin{itemize}
+	\item Una fuente de voltaje ideal cuyo valor sea exactamente $\hat{v}(t)$, correspondiente a la caída de tensión original de la rama.
+	\item Una fuente de corriente ideal cuyo valor sea exactamente $\hat{i}(t)$, correspondiente a la corriente original que circula por la rama.
+\end{itemize}
+Esta simplificación es válida bajo la premisa de que el circuito modificado resultante siga conservando una solución única para todo instante de tiempo $t$.
+
+\begin{figure}[h!]
+	\centering
+	% --- (a) Red Original ---
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\begin{circuitikz}[scale=0.8]
+			% Bloque Eta_R
+			\draw (0,0) rectangle (2,3) node[pos=.5] {$\eta_R$};
+			% Conexiones
+			\draw (2,2.5) to[short, i=$i$, -*] (3.5,2.5) node[above] {1};
+			\draw (2,0.5) to[short, -*] (3.5,0.5) node[below] {1'};
+			% Bloque Eta_L
+			\draw (3.5,0) rectangle (5,3) node[pos=.5] {$\eta_L$};
+			% Etiqueta de voltaje
+			\draw (3.5,2.5) to[open, v=$v$] (3.5,0.5);
+		\end{circuitikz}
+		\caption{Red eléctrica $\eta$}
+	\end{subfigure}
+	\hfill
+	% --- (b) Sustitución por Voltaje ---
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\begin{circuitikz}[scale=0.8]
+			\draw (0,0) rectangle (2,3) node[pos=.5] {$\eta_R$};
+			\draw (2,2.5) to[short, i=$i$, -*] (3.5,2.5) node[above] {1};
+			\draw (2,0.5) to[short, -*] (3.5,0.5) node[below] {1'};
+			% Fuente de voltaje de sustitución
+			\draw (3.5,2.5) to[V, l=$\hat{v}(t)$] (3.5,0.5);
+		\end{circuitikz}
+		\caption{Red modificada $\eta_v$}
+	\end{subfigure}
+	\hfill
+	% --- (c) Sustitución por Corriente ---
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\begin{circuitikz}[scale=0.8]
+			\draw (0,0) rectangle (2,3) node[pos=.5] {$\eta_R$};
+			\draw (2,2.5) to[short, i=$i$, -*] (3.5,2.5) node[above] {1};
+			\draw (2,0.5) to[short, -*] (3.5,0.5) node[below] {1'};
+			% Fuente de corriente de sustitución
+			\draw (3.5,2.5) to[I, l=$\hat{i}(t)$] (3.5,0.5);
+		\end{circuitikz}
+		\caption{Red modificada $\eta_i$}
+	\end{subfigure}
+	\caption{Representación del Teorema de Sustitución según la configuración de parámetros concentrados.}
+\end{figure}
+
+\subsection{Teorema de Tellegen}
+
+El teorema de Tellegen es una herramienta analítica de carácter general que se fundamenta exclusivamente en las leyes de Kirchhoff, por lo que su validez es independiente de si los elementos de la red son lineales o no lineales, variantes o invariantes en el tiempo. Este establece que, en una red eléctrica de $n$ nodos y $b$ ramas con direcciones de referencia asociadas, se cumple la siguiente relación:
+
+\begin{equation}
+	\sum_{k=1}^{b} v_{k} j_{k} = 0
+\end{equation}
+
+Donde $v_{k}$ y $j_{k}$ representan el voltaje y la corriente eléctrica de la k-ésima rama, respectivamente. Una forma equivalente de expresar este teorema mediante notación matricial, útil para el análisis computacional de redes, es:
+
+\begin{equation}
+	[V]_{k}^{T} [J]_{k} = 0
+\end{equation}
+
+Físicamente, este teorema está íntimamente relacionado con el principio de conservación de la energía. Dado que el producto $v_{k} j_{k}$ representa la potencia suministrada o consumida por un elemento, la ecuación anterior dicta que la suma de la potencia suministrada a una red eléctrica es idéntica a la potencia consumida dentro de la misma. 
+
+La única restricción operativa para la aplicación de este teorema es que la red eléctrica sea de parámetros concentrados y determinística, garantizando así que se satisfagan las leyes de corrientes y voltajes de Kirchhoff en todo momento.
+
+\subsection{Teorema de Thévenin}
+El teorema de Thévenin se emplea para analizar una red eléctrica lineal que se encuentra conectada a una carga eléctrica arbitraria. El teorema asevera que la corriente eléctrica y el voltaje transferidos no se afectan si la red lineal es reemplazada por su circuito equivalente de Thévenin. Una de las principales ventajas de este enfoque es que no asume restricciones sobre la carga, la cual puede ser lineal o no lineal, variante o invariante en el tiempo.
+
+El modelo equivalente se compone de una red eléctrica simplificada de dos terminales en serie con una fuente independiente de voltaje, definida por los siguientes parámetros:
+\begin{itemize}
+	\item \textbf{Voltaje de circuito abierto ($e_{oc}$ o $V_{th}$):} Es la diferencia de potencial que aparece entre las terminales de la red cuando se desconecta la carga. Este voltaje es el resultado directo de todas las fuentes independientes y las condiciones iniciales presentes en la red original.
+	\item \textbf{Impedancia de Thévenin ($Z_{eq}$ o $R_{th}$):} Es la impedancia equivalente de la red vista desde las terminales de salida. Se determina cancelando todas las fuentes independientes (las fuentes de voltaje se cortocircuitan y las de corriente se abren) y anulando las condiciones iniciales. Resulta fundamental destacar que, durante este proceso de apagado de fuentes, las fuentes dependientes no se deben modificar.
+\end{itemize}
+
+\begin{center}
+	\begin{circuitikz} \draw
+		% Fuente de tensión de Thévenin
+		(0,0) to[V, l=$V_{th}$] (0,3)
+		% Resistencia de Thévenin
+		(0,3) to[R, l=$R_{th}$, -*] (3,3)
+		% Terminales de salida
+		(3,3) to[short] (4,3) node[right] {A}
+		(3,0) to[short, -*] (3,0) -- (4,0) node[right] {B}
+		(0,0) -- (3,0)
+		% Línea punteada para indicar el equivalente
+		[dashed] (-1,-0.5) rectangle (3.5,3.5);
+	\end{circuitikz}
+\end{center}
