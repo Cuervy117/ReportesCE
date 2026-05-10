@@ -1,0 +1,33 @@
+\section{Marco Teórico}
+El escalamiento es un procedimiento de diseño que permite transformar un circuito existente en uno nuevo mediante la aplicación de factores de escala. Esta técnica es fundamental para ajustar niveles de impedancia y rangos de frecuencia de manera predecible.
+
+\subsection{Escalamiento de Impedancia}
+El escalamiento de magnitud consiste en multiplicar todas las impedancias de una red por un factor constante $K_m$. El propósito principal de este método es ajustar los valores de los componentes (resistencias, inductores y capacitores) a magnitudes que sean más prácticas para su construcción o que se encuentren dentro de los rangos comerciales disponibles.
+
+Bajo este tipo de escalamiento, se busca que la respuesta en frecuencia del sistema permanezca inalterada. Matemáticamente, si la frecuencia $\omega$ se mantiene constante, los nuevos valores de los elementos se calculan como:
+\begin{itemize}
+	\item \textbf{Resistencia:} $R' = K_m R$
+	\item \textbf{Inductancia:} $L' = K_m L$
+	\item \textbf{Capacitancia:} $C' = \frac{C}{K_m}$
+\end{itemize}
+
+Es importante notar que, dado que el factor $K_m$ se aplica proporcionalmente a todos los elementos de la red, la función de transferencia de voltaje $H(s)$ no sufre cambios, ya que el factor de escala se cancela en la relación de voltajes. Asimismo, parámetros como el factor de calidad ($Q$) y el ancho de banda se mantienen constantes.
+
+\subsection{Escalamiento en Frecuencia}
+El escalamiento en frecuencia es el proceso mediante el cual se desplaza la respuesta de una red a lo largo del eje de frecuencias por un factor $K_f$. Este método permite que un diseño realizado para una frecuencia específica (por ejemplo, un filtro prototipo con frecuencia de corte de $1 \text{ rad/s}$) sea trasladado a cualquier otra frecuencia de interés.
+
+Para lograr este desplazamiento manteniendo los mismos niveles de impedancia en las nuevas frecuencias escaladas, los componentes reactivos deben modificarse de la siguiente forma:
+\begin{itemize}
+	\item \textbf{Resistencia:} $R' = R$ (debido a que su impedancia es independiente de la frecuencia).
+	\item \textbf{Inductancia:} $L' = \frac{L}{K_f}$
+	\item \textbf{Capacitancia:} $C' = \frac{C}{K_f}$
+\end{itemize}
+
+En este escenario, todas las frecuencias características del circuito, como las frecuencias de corte y de resonancia, se multiplican por el factor $K_f$. Aunque la respuesta se desplaza en el eje horizontal, la forma de la curva (ganancia y fase) y el factor de calidad del sistema permanecen invariables.
+
+\subsection{Escalamiento Combinado de Magnitud y Frecuencia}
+En aplicaciones reales, es común que se requiera ajustar tanto la impedancia como la frecuencia de operación de manera simultánea. En tales casos, se aplican ambos factores ($K_m$ y $K_f$) resultando en las siguientes expresiones generales para los componentes:
+\begin{equation}
+	R' = K_m R, \quad L' = \frac{K_m}{K_f} L, \quad C' = \frac{1}{K_m K_f} C
+\end{equation}
+Estas fórmulas permiten una flexibilidad total para adaptar cualquier circuito prototipo a las necesidades específicas de una implementación técnica final.
