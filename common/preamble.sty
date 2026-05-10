@@ -3,7 +3,7 @@
 % --- 1. Core Configuration (Language & Fonts) ---
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[spanish, es-tabla]{babel}
+\RequirePackage[spanish,es-noshorthands]{babel}
 \spanishdecimal{.}
 
 % Fonts: Fira Sans for prose, Fira Mono for code
@@ -20,7 +20,13 @@
 \usepackage{tocloft}
 
 % --- 3. Mathematics & Science ---
-\usepackage{amsmath, mathtools, amsfonts, amssymb}
+\RequirePackage{amsmath}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage{enumitem}
+\RequirePackage{siunitx}
+\RequirePackage{amsmath}
+\RequirePackage{mathtools, amsfonts, amssymb}
 \usepackage{siunitx}
 \usepackage{tikz}
 \usepackage{circuitikz} % Essential for your circuits lab
@@ -33,6 +39,9 @@
 \usepackage{epstopdf}
 \usepackage{pdfpages}
 \usepackage{fancybox}
+\RequirePackage{pgfplots}
+\usetikzlibrary{arrows.meta}
+\pgfplotsset{compat=1.18}
 
 % --- 5. Colors & Styling ---
 \usepackage{xcolor}
@@ -80,3 +89,18 @@
 	colback=yellow!20!white, colframe=white, #1
 }
 \graphicspath{{../common/}{figures/}}
+
+% Define \placeholder 
+\newcommand{\placeholderfigure}[2]{
+	\begin{figure}[htbp]
+		\centering
+		\fbox{
+			\parbox{0.85\linewidth}{
+				\centering
+				#1\\[6pt]
+				\texttt{\detokenize{#2}}
+			}
+		}
+		\caption{#1}
+	\end{figure}
+}
