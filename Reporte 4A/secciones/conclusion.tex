@@ -1,15 +1,19 @@
 \section{Conclusiones}
 
-La realización de esta práctica permitió validar de manera integral los principios de la resonancia en circuitos serie, consolidando la relación entre los modelos analíticos y el comportamiento físico de los componentes reactivos. A partir de los resultados obtenidos, se desprenden las siguientes conclusiones:
+La realización de esta práctica permitió comprobar experimentalmente el fenómeno de resonancia eléctrica en un circuito RLC serie. A partir de la variación de la frecuencia de la señal senoidal de entrada, se observó que el comportamiento del circuito cambia dependiendo de la relación entre la reactancia inductiva y la reactancia capacitiva.
 
-\begin{itemize}
-	\item \textbf{Validación del estado de resonancia:} Se comprobó satisfactoriamente que en la frecuencia de resonancia ($\omega_0$), la impedancia del circuito alcanza su valor mínimo y se vuelve puramente resistiva. Esto se manifiesta experimentalmente mediante la anulación del ángulo de fase entre el voltaje y la corriente ($\theta = 0^{\circ}$), lo que permite la máxima transferencia de corriente en el sistema.
-	
-	\item \textbf{Comportamiento de la respuesta en frecuencia:} El análisis permitió observar la transición en el carácter de la carga según la frecuencia de operación. Se verificó que para frecuencias inferiores a $\omega_0$, el circuito presenta una predominancia capacitiva, mientras que para frecuencias superiores, el comportamiento se torna inductivo. Esta simetría en la respuesta es fundamental para comprender la selectividad de los circuitos resonantes.
-	
-	\item \textbf{Significancia del Factor de Calidad (Q):} Se demostró que el factor de calidad no es solo un valor matemático, sino un indicador directo de la agudeza de la curva de respuesta. Un valor de $Q$ elevado, como el observado en los modelos analizados, garantiza una banda de paso estrecha y una alta selectividad, concentrando la energía en una región muy específica del espectro.
-	
-	\item \textbf{Verificación de los puntos de media potencia:} El análisis de potencia confirmó que en las frecuencias de corte ($\omega_1$ y $\omega_2$), la potencia disipada por la resistencia se reduce exactamente a la mitad del valor máximo obtenido en la resonancia. La correspondencia entre la teoría y las mediciones de voltaje en estos puntos valida la precisión del modelo de la función de transferencia para describir sistemas de segundo orden.
-	
-	\item \textbf{Correlación teórico-experimental:} Finalmente, la discrepancia controlada entre los apuntes teóricos y las mediciones en laboratorio resalta la importancia de considerar las tolerancias de los componentes físicos. No obstante, la arquitectura del fenómeno de resonancia se mantuvo invariante, demostrando que las leyes fundamentales y el análisis de mallas son herramientas predictivas confiables para el diseño de circuitos.
-\end{itemize}
+\vspace{5pt}
+
+Se identificó que, para frecuencias menores a la frecuencia de resonancia, el circuito presentó un comportamiento predominantemente capacitivo, lo cual se reflejó en un desfase negativo entre la señal de entrada y la señal de salida. En cambio, para frecuencias mayores a la resonancia, el circuito presentó un comportamiento predominantemente inductivo, observándose un desfase positivo.
+
+\vspace{5pt}
+
+En la frecuencia de resonancia, las señales medidas en el osciloscopio se encontraron prácticamente en fase, lo que confirma que la parte reactiva de la impedancia se anuló y que el circuito se comportó principalmente como una carga resistiva. En esta condición, la impedancia fue mínima y la corriente alcanzó su valor máximo, por lo que el voltaje medido sobre la resistencia también presentó un valor elevado.
+
+\vspace{5pt}
+
+Además, se determinaron experimentalmente las frecuencias de corte inferior y superior, correspondientes aproximadamente a desfases de $-45^\circ$ y $45^\circ$. Con estos valores se obtuvo el ancho de banda del circuito y el factor de calidad. El valor calculado de $Q$ indicó que el circuito no fue altamente selectivo, ya que presentó una respuesta en frecuencia relativamente amplia.
+
+\vspace{5pt}
+
+Finalmente, se concluye que las diferencias entre los valores teóricos y experimentales pueden atribuirse a las tolerancias de los componentes, la resistencia interna de la bobina, las pérdidas parásitas del montaje y las limitaciones propias de los instrumentos de medición. A pesar de estas variaciones, el fenómeno de resonancia se observó claramente y pudo analizarse mediante las señales obtenidas en el osciloscopio
