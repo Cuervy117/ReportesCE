@@ -1,1 +1,173 @@
 \section{Marco teórico}
+	
+	La presente práctica se fundamenta en el análisis de la potencia eléctrica en sistemas trifásicos con alimentación senoidal, frecuencia de $60~\text{Hz}$ y tres fases desfasadas entre sí $120^\circ$. En este tipo de sistemas, la energía eléctrica se suministra mediante tres tensiones alternas de igual frecuencia y, en condiciones ideales, de igual magnitud. El desfase angular entre fases permite una transferencia de potencia más uniforme que en un sistema monofásico, por lo que su uso es común en instalaciones industriales, motores eléctricos, transformadores y sistemas de distribución.
+	
+	En un sistema trifásico, las cargas pueden conectarse principalmente en configuración estrella $(Y)$ o delta $(\Delta)$. En la conexión estrella, cada impedancia de carga se conecta entre una línea y un punto común llamado neutro; en la conexión delta, las impedancias se conectan entre líneas formando un circuito cerrado. Para un sistema balanceado se cumplen las siguientes relaciones:
+	
+	\[
+	\text{Conexión estrella:} \qquad V_L = \sqrt{3}V_F, \qquad I_L = I_F
+	\]
+	
+	\[
+	\text{Conexión delta:} \qquad V_L = V_F, \qquad I_L = \sqrt{3}I_F
+	\]
+	
+	donde $V_L$ e $I_L$ representan la tensión y corriente de línea, mientras que $V_F$ e $I_F$ representan la tensión y corriente de fase. Estas relaciones permiten expresar la potencia total del sistema trifásico a partir de magnitudes de línea, lo cual resulta práctico durante las mediciones de laboratorio.
+	
+	Para estudiar la potencia eléctrica en corriente alterna es necesario considerar que tanto la tensión como la corriente son funciones del tiempo. Si se tiene una tensión senoidal
+	
+	\[
+	v(t)=V_m\cos(\omega t)
+	\]
+	
+	y una corriente
+	
+	\[
+	i(t)=I_m\cos(\omega t-\varphi),
+	\]
+	
+	la potencia instantánea se define como el producto de ambas señales:
+	
+	\[
+	p(t)=v(t)i(t).
+	\]
+	
+	Al desarrollar esta expresión se obtiene una componente constante y una componente oscilatoria. La componente constante corresponde a la potencia promedio o potencia activa, mientras que la componente oscilatoria representa el intercambio periódico de energía entre la fuente y los elementos reactivos del circuito. Por ello, la potencia activa se expresa como
+	
+	\[
+	P = VI\cos\varphi,
+	\]
+	
+	donde $V$ e $I$ son valores eficaces y $\varphi$ es el ángulo de desfase entre la tensión y la corriente. La potencia activa se mide en watts $(W)$ y representa la energía que efectivamente se transforma en trabajo útil, calor, luz o energía mecánica.
+	
+	Además de la potencia activa, en circuitos de corriente alterna aparecen la potencia reactiva y la potencia aparente. La potencia reactiva se define como
+	
+	\[
+	Q = VI\sin\varphi,
+	\]
+	
+	y se mide en voltamperios reactivos $(VAR)$. Esta potencia no produce trabajo útil neto, sino que está asociada al almacenamiento y devolución de energía en los campos magnéticos de inductores y motores, o en los campos eléctricos de capacitores. Por otro lado, la potencia aparente se define como
+	
+	\[
+	S = VI,
+	\]
+	
+	y se mide en voltamperios $(VA)$. La potencia aparente representa la potencia total que debe suministrar la fuente para cubrir tanto la potencia activa como la potencia reactiva del circuito.
+	
+	La relación entre estas tres potencias se representa mediante el triángulo de potencias, en el cual la potencia activa $P$ corresponde al cateto horizontal, la potencia reactiva $Q$ al cateto vertical y la potencia aparente $S$ a la hipotenusa. Por lo tanto, se cumple que
+	
+	\[
+	S^2 = P^2 + Q^2,
+	\]
+	
+	o bien,
+	
+	\[
+	S = \sqrt{P^2+Q^2}.
+	\]
+	
+	En forma compleja, la potencia puede representarse como
+	
+	\[
+	\mathbf{S}=P+jQ,
+	\]
+	
+	donde la parte real corresponde a la potencia activa y la parte imaginaria a la potencia reactiva. Esta representación permite identificar si el circuito tiene comportamiento inductivo o capacitivo. Cuando $Q$ es positiva, el circuito tiene predominio inductivo; cuando $Q$ es negativa, el circuito tiene predominio capacitivo.
+	
+	En sistemas trifásicos, la potencia total se obtiene sumando la potencia de cada fase:
+	
+	\[
+	P_T=P_A+P_B+P_C,
+	\]
+	
+	\[
+	Q_T=Q_A+Q_B+Q_C,
+	\]
+	
+	\[
+	S_T=S_A+S_B+S_C.
+	\]
+	
+	Cuando el sistema es balanceado, las tres fases presentan la misma magnitud de tensión, corriente y ángulo de desfase, por lo que las expresiones anteriores se simplifican a
+	
+	\[
+	P_T = 3V_FI_F\cos\varphi,
+	\]
+	
+	\[
+	Q_T = 3V_FI_F\sin\varphi,
+	\]
+	
+	\[
+	S_T = 3V_FI_F.
+	\]
+	
+	Utilizando magnitudes de línea, las ecuaciones de potencia trifásica balanceada pueden escribirse como
+	
+	\[
+	P_T = \sqrt{3}V_LI_L\cos\varphi,
+	\]
+	
+	\[
+	Q_T = \sqrt{3}V_LI_L\sin\varphi,
+	\]
+	
+	\[
+	S_T = \sqrt{3}V_LI_L.
+	\]
+	
+	Estas expresiones son fundamentales para analizar los resultados experimentales obtenidos con cargas conectadas en estrella y delta, así como para comparar el comportamiento de cargas resistivas, inductivas y capacitivas.
+	
+	El ángulo de desfase $\varphi$ depende directamente del tipo de carga conectada. En una carga puramente resistiva, la tensión y la corriente se encuentran en fase, por lo que
+	
+	\[
+	\varphi = 0^\circ,
+	\]
+	
+	y la potencia aparente coincide con la potencia activa. En consecuencia, no existe potencia reactiva idealmente. En una carga inductiva, la corriente se retrasa respecto a la tensión, generando potencia reactiva positiva. Este comportamiento aparece en bobinas, transformadores y motores eléctricos. En una carga capacitiva, la corriente se adelanta respecto a la tensión, generando potencia reactiva negativa, comportamiento característico de los bancos de capacitores.
+	
+	El factor de potencia es un indicador del aprovechamiento de la energía eléctrica suministrada a una carga. Se define como la relación entre la potencia activa y la potencia aparente:
+	
+	\[
+	FP = \frac{P}{S}.
+	\]
+	
+	Para señales senoidales, también puede expresarse como
+	
+	\[
+	FP = \cos\varphi.
+	\]
+	
+	Cuando el factor de potencia es cercano a la unidad, la mayor parte de la potencia suministrada se convierte en trabajo útil. En cambio, cuando el factor de potencia es bajo, una parte importante de la potencia aparente corresponde a potencia reactiva, lo que obliga a la fuente a suministrar una corriente mayor para entregar la misma potencia activa. Esto provoca mayores pérdidas por efecto Joule en los conductores, ya que dichas pérdidas dependen de $I^2R$, además de caídas de tensión y menor eficiencia del sistema.
+	
+	La corrección del factor de potencia consiste en reducir la potencia reactiva neta demandada por la carga. En instalaciones con cargas inductivas, como motores, esta corrección se realiza comúnmente mediante bancos de capacitores conectados en paralelo. Los capacitores suministran potencia reactiva de signo contrario a la demandada por la carga inductiva, reduciendo así la potencia reactiva total del sistema:
+	
+	\[
+	Q_T = Q_L - Q_C.
+	\]
+	
+	Al disminuir la potencia reactiva, también disminuye la potencia aparente requerida por la fuente:
+	
+	\[
+	S = \sqrt{P^2+Q^2}.
+	\]
+	
+	Si la potencia activa se mantiene aproximadamente constante y la potencia reactiva disminuye, entonces el factor de potencia aumenta y la corriente de línea se reduce. Esta es la razón por la cual la corrección del factor de potencia permite mejorar el aprovechamiento de la energía eléctrica, disminuir la corriente consumida y reducir pérdidas en conductores y equipos.
+	
+	Para determinar la potencia reactiva que debe compensarse al corregir el factor de potencia desde un valor inicial $FP_i$ hasta un valor final deseado $FP_f$, se puede utilizar la expresión
+	
+	\[
+	Q_C = P\left(\tan\varphi_i-\tan\varphi_f\right),
+	\]
+	
+	donde
+	
+	\[
+	\varphi_i=\cos^{-1}(FP_i),
+	\qquad
+	\varphi_f=\cos^{-1}(FP_f).
+	\]
+	
+	Esta ecuación permite estimar la cantidad de potencia reactiva capacitiva necesaria para acercar el sistema a un factor de potencia más alto. En la práctica, la corrección no implica que la carga consuma menos potencia activa, sino que reduce la potencia aparente y la corriente que deben entregar la fuente y los conductores para alimentar dicha carga.
+	
+	Por lo tanto, el análisis de potencia en esta práctica permite observar experimentalmente el comportamiento de cargas resistivas, inductivas y capacitivas en un sistema trifásico, así como verificar la influencia del factor de potencia sobre la corriente consumida. Asimismo, permite comprobar que la compensación de potencia reactiva mediante capacitores es una técnica efectiva para mejorar el factor de potencia y disminuir la demanda aparente del sistema eléctrico.
