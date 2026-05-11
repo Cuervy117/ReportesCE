@@ -1,0 +1,53 @@
+\section{Marco Teórico}
+
+El fenómeno de resonancia en circuitos eléctricos es una condición de operación donde la red presenta una impedancia puramente resistiva, lo que implica que la fase entre el voltaje y la corriente es cero. Esta condición es fundamental para el diseño de filtros y sistemas de comunicación.
+
+\subsection{Resonancia en Serie (Circuito RLC)}
+
+En un circuito compuesto por una resistencia ($R$), una inductancia ($L$) y una capacitancia ($C$) conectados en serie, la impedancia total se expresa en el dominio de la frecuencia compleja como:
+
+\begin{equation}
+	Z(j\omega) = R + j\left(\omega L - \frac{1}{\omega C}\right)
+\end{equation}
+
+La resonancia ocurre cuando la parte imaginaria de la impedancia se anula, es decir, cuando la reactancia inductiva ($X_L$) y la reactancia capacitiva ($X_C$) son iguales en magnitud:
+
+\begin{equation}
+	\omega_0 L = \frac{1}{\omega_0 C} \implies \omega_0 = \frac{1}{\sqrt{LC}} \text{ [rad/s]}
+\end{equation}
+
+En esta frecuencia ($\omega_0$), la impedancia es mínima ($Z = R$) y, por consecuencia, la corriente del circuito es máxima.
+
+\subsection{Factor de Calidad (Q) y Selectividad}
+
+El factor de calidad es un parámetro adimensional que relaciona la energía máxima almacenada con la energía disipada por ciclo. Para un circuito serie, se define como:
+
+\begin{equation}
+	Q = \frac{\omega_0 L}{R} = \frac{1}{\omega_0 RC}
+\end{equation}
+
+Un valor de $Q$ elevado indica una mayor selectividad del circuito, lo que se traduce en una curva de respuesta en frecuencia más aguda.
+
+\subsection{Ancho de Banda y Frecuencias de Corte}
+
+El ancho de banda ($BW$) es el rango de frecuencias en el cual la potencia disipada es igual o mayor a la mitad de la potencia máxima. Los límites de este rango son las frecuencias de media potencia ($\omega_1$ y $\omega_2$), las cuales se calculan mediante:
+
+\begin{equation}
+	\omega_{1,2} = \omega_0 \left[ \sqrt{1 + \left(\frac{1}{2Q}\right)^2} \mp \frac{1}{2Q} \right]
+\end{equation}
+
+La relación entre estos parámetros y el factor de calidad está dada por $BW = \omega_2 - \omega_1 = \omega_0 / Q$.
+
+\subsection{Respuesta en Potencia}
+
+La potencia media disipada por el circuito en función de la frecuencia se determina por la resistencia: $P(\omega) = I_{rms}^2 R$. En el punto de resonancia, la potencia es máxima ($P_0$):
+
+\begin{equation}
+	P_0 = \frac{V_{rms}^2}{R}
+\end{equation}
+
+En las frecuencias de corte $\omega_1$ y $\omega_2$, la corriente se reduce a $I_{max}/\sqrt{2}$, lo que resulta en que la potencia disipada sea exactamente la mitad de la potencia máxima:
+
+\begin{equation}
+	P(\omega_1) = P(\omega_2) = \frac{1}{2} P_0
+\end{equation}
